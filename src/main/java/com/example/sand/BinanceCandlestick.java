@@ -16,19 +16,21 @@ public class BinanceCandlestick {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
 
-    private final String pair;
-    private final String klineInterval;
-    private final long openTime;
-    private final BigDecimal open;
-    private final BigDecimal high;
-    private final BigDecimal low;
-    private final BigDecimal close;
-    private final BigDecimal volume;
-    private final long closeTime;
-    private final BigDecimal quoteAssetVolume;
-    private final long numberOfTrades;
-    private final BigDecimal takerBuyBaseAssetVolume;
-    private final BigDecimal takerBuyQuoteAssetVolume;
+    private String pair;
+    private String klineInterval;
+    private long openTime;
+    private BigDecimal open;
+    private BigDecimal high;
+    private BigDecimal low;
+    private BigDecimal close;
+    private BigDecimal volume;
+    private long closeTime;
+    private BigDecimal quoteAssetVolume;
+    private long numberOfTrades;
+    private BigDecimal takerBuyBaseAssetVolume;
+    private BigDecimal takerBuyQuoteAssetVolume;
+
+    public BinanceCandlestick(){}
 
     public BinanceCandlestick(
             String pair,
@@ -58,6 +60,10 @@ public class BinanceCandlestick {
         this.numberOfTrades = numberOfTrades;
         this.takerBuyBaseAssetVolume = takerBuyBaseAssetVolume;
         this.takerBuyQuoteAssetVolume = takerBuyQuoteAssetVolume;
+    }
+
+    public Integer getId() {
+        return id;
     }
 
     public String getCurrencyPair() {
