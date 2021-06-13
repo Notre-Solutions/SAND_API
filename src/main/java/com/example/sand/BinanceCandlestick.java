@@ -78,23 +78,23 @@ public class BinanceCandlestick {
         return openTime;
     }
 
-    public BigDecimal getOpenPrice() {
+    public BigDecimal getOpen() {
         return open;
     }
 
-    public BigDecimal getHighPrice() {
+    public BigDecimal getHigh() {
         return high;
     }
 
-    public BigDecimal getLowPrice() {
+    public BigDecimal getLow() {
         return low;
     }
 
-    public BigDecimal getAveragePrice() {
+    private BigDecimal getAveragePrice() {
         return low.add(high).divide(new BigDecimal("2"));
     }
 
-    public BigDecimal getClosePrice() {
+    public BigDecimal getClose() {
         return close;
     }
 
