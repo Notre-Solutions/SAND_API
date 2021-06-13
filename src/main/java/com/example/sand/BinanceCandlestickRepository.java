@@ -9,6 +9,6 @@ import org.springframework.data.repository.CrudRepository;
 public interface BinanceCandlestickRepository extends CrudRepository<BinanceCandlestick, Integer> {
 
     @Query("select * from binance_candlestick where pair = ?1 order by close_time ASC limit 1")
-    BinanceCandlestick getOldestCandleByCurrencyPair();
+    BinanceCandlestick getOldestCandlestickByCurrencyPair(String pair);
 
 }

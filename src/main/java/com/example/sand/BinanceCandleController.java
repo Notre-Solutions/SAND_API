@@ -38,9 +38,9 @@ public class BinanceCandleController {
         return binanceCandlestickRepository.findAll();
     }
 
-    @GetMapping(path="/getOldestByCurrencyPair")
-    public @ResponseBody BinanceCandlestick getOldestByCurrencyPair() {
+    @GetMapping(path="/getOldestCandlestickByCurrencyPair/{pair}")
+    public @ResponseBody BinanceCandlestick getOldestCandlestickByCurrencyPair(@PathVariable String pair) {
         // This returns a JSON or XML with the users
-        return binanceCandlestickRepository.getOldestCandleByCurrencyPair();
+        return binanceCandlestickRepository.getOldestCandlestickByCurrencyPair(pair);
     }
 }
