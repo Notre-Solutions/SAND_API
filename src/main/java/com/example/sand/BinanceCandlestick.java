@@ -66,7 +66,7 @@ public class BinanceCandlestick {
         return id;
     }
 
-    public String getCurrencyPair() {
+    public String getPair() {
         return pair;
     }
 
