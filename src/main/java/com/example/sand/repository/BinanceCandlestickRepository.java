@@ -1,5 +1,6 @@
-package com.example.sand;
+package com.example.sand.repository;
 
+import com.example.sand.model.BinanceCandlestick;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
