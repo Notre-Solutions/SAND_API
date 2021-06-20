@@ -36,17 +36,55 @@ public class CandleController {
     ResponseEntity<JobConfiguration> addNewCandleJobConfig (@RequestBody JobConfiguration jobConfig) {
         // @ResponseBody means the returned String is the response, not a view name
         // @RequestParam means it is a parameter from the GET or POST request
-        jobConfigurationRepository.save(jobConfig);
+        List<JobConfiguration> jobConfigs = jobConfigurationRepository.getConfigByName(jobConfig.getName());
+        //Assumption is we will only have 1 unique name per job
+        if(jobConfigs.size()>0){
+            for(JobConfiguration job : jobConfigs){
+                int res = jobConfigurationRepository.setExistingConfigActive(job.getName());
+                if(res==1){
+                    return ResponseEntity
+                            .created(URI.create(String.format("/v1/candle/binance/%s", jobConfig.getId())))
+                            .body(job);
+                }else{
+
+                }
+            }
+        }
+        JobConfiguration res = jobConfigurationRepository.save(jobConfig);
         return ResponseEntity
                 .created(URI.create(String.format("/v1/candle/binance/%s", jobConfig.getId())))
-                .body(jobConfig);
+                .body(res);
+    }
+
+    @PostMapping(path="/setJobConfigInactive") // Map ONLY POST Requests
+    public @ResponseBody
+    ResponseEntity<?> setJobConfigInactive (@RequestBody JobConfiguration jobConfig) {
+        // @ResponseBody means the returned String is the response, not a view name
+        // @RequestParam means it is a parameter from the GET or POST request
+        List<JobConfiguration> jobConfigs = jobConfigurationRepository.getConfigByName(jobConfig.getName());
+        //Assumption is we will only have 1 unique name per job
+        if(jobConfigs.size()>0){
+            for(JobConfiguration job : jobConfigs) {
+                int res = jobConfigurationRepository.setExistingConfigNotActive(jobConfig.getName());
+                if(res==1){
+                    job.setActive(false);
+                    return ResponseEntity
+                            .status(200).build();
+                }else{
+                    return ResponseEntity
+                            .status(500).build();
+                }
+            }
+        }
+        return ResponseEntity.notFound().build();
+
     }
     
     @GetMapping(path="/getActiveJobCofigs")
     public @ResponseBody
     List<JobConfiguration> getActiveJobCofigs() {
         // This returns a JSON or XML with the users
-        return jobConfigurationRepository.getActiveJobCofigs();
+        return jobConfigurationRepository.getActiveJobConfigs();
     }
 
     @GetMapping(path="/{id}")
