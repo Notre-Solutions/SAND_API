@@ -1,4 +1,4 @@
-package com.example.sand;
+package com.example.sand.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
